@@ -5,21 +5,22 @@ import java.time.format.DateTimeFormatter;
 import java.time.Period;
 
 class petShop{
-    private static ArrayList<Tutor> tutores = new ArrayList<Tutor>();
+    private static ArrayList<Tutor> tutores = new ArrayList<Tutor>(); //Declara tutores como lista de Tutor
     public static void main(String[] args){
+        //Declara variáveis de controle
         int cont = 1;
         char op = 'n';
-
+        //Chama a função para popular cadastro
         cont = popularCadastro(cont);
 
-        while (op != 'x'){
+        while (op != 'x'){ //Criação do loop para menu (x encerra)
             op = Menu();
             Scanner input = new Scanner(System.in);
             switch (op){
-                case 'c':
+                case 'c': //Caso a opção desejada for cadastrar tutor + pet(s)
                     System.out.println("Digite nome do tutor (vazio encerra cadastro tutor): ");
                     String nome_tutor = input.nextLine();
-                    if (nome_tutor == ""){
+                    if (nome_tutor == ""){ //Vazio para encerrar loop
                         break;
                     }
                     String[] data_com = {"ano","mes","dia"};
@@ -28,22 +29,22 @@ class petShop{
                         System.out.println("Digite dia (dd), mes (mm) e ano (aaaa) de nascimento do tutor:  \n (separados por espa�os)");
                         String data_nasc = input.nextLine();
                         clearBuffer(input);
-                        data_com = data_nasc.split(" ");
-                        veridata = dataveri(Integer.parseInt(data_com[2]),Integer.parseInt(data_com[1]), Integer.parseInt(data_com[0]));
-                        if (!veridata){
+                        data_com = data_nasc.split(" ");//Função para não pegar os espaços
+                        veridata = dataveri(Integer.parseInt(data_com[2]),Integer.parseInt(data_com[1]), Integer.parseInt(data_com[0])); //Variável para guardar data de nascimento de acordo com a posição
+                        if (!veridata){ //Verificação da data de nascimento
                             System.out.println("Dava invalida");
                         }
                     }
                     LocalDate data = LocalDate.of(Integer.parseInt(data_com[2]),Integer.parseInt(data_com[1]), Integer.parseInt(data_com[0]));
                     System.out.println("Digite endereco do tutor/pet: ");
                     String endereco = input.nextLine(); 
-                    Tutor tutor = new Tutor(cont, nome_tutor, endereco, data);
+                    Tutor tutor = new Tutor(cont, nome_tutor, endereco, data); //Criação do tutor
                     System.out.println("Digite o nome do pet: ");
                     String nomePet = input.nextLine(); 
                     System.out.println("Digite o tipo de pet: ");
                     String tipoPet = input.nextLine(); 
-                    tutor.incluiPet(nomePet, tipoPet);
-                    tutores.add(tutor);
+                    tutor.incluiPet(nomePet, tipoPet); //Criação do Pet
+                    tutores.add(tutor); //Adiciona o novo tutor à lista
                     cont++;
                     break;
                 case 'i':
